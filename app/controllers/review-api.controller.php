@@ -5,7 +5,6 @@ require_once './app/views/api.view.php';
 class ReviewApiController {
     private $model;
     private $view;
-
     private $data;
 
     public function __construct() {
@@ -21,14 +20,15 @@ class ReviewApiController {
     }
 
     public function showAll($params = NULL){
+      $campeones=$this->model->getAll();
         if (isset($_GET['sortby']) && isset($_GET['order'])){
             if($_GET['order'] == 'ASC'){
-                if($_GET['sortby'] == 'id')
-                $campeones = $this->model->orderASC();//?sortby=stock&order=ASC
+                if($_GET['sortby'] == 'afinidad')
+                $campeones = $this->model->orderASC();//?sortby=afinidad&order=ASC
                 }
             elseif ($_GET['order'] == 'DESC'){
-                if($_GET['sortby'] == 'id')
-                $campeones = $this->model->orderDESC();//?sortby=stock&order=DESC
+                if($_GET['sortby'] == 'afinidad')
+                $campeones = $this->model->orderDESC();//?sortby=afinidad&order=DESC
             }
         }
         else{
@@ -44,17 +44,18 @@ class ReviewApiController {
         if($campeones)
         $this->view->response($campeones);
         else 
-        $this->view->response("El auto buscado con el id=$id no existe", 404);
+        $this->view->response("El campeon buscado con el id=$id no existe", 404);
       }
 
-      public function addCampeones($params = NULL){ //añadir un nuevo auto
+      public function addCampeones($params = NULL){ //añadir un nuevo campeon
+        
         $campeonesbyid = $this->getData();  
         
-        if( empty($campeonesbyid->id_campeon)||empty($campeonesbyid->id_faccion_fk) || empty($campeonesbyid->campeon)|| empty($campeonesbyid->rareza)|| empty($campeonesbyid->afinidad)){
+        if( empty($campeonesbyid->id_faccion_fk) || empty($campeonesbyid->campeon)|| empty($campeonesbyid->rareza)|| empty($campeonesbyid->afinidad)){
             $this->view->response("Complete los datos", 400);
         }
         else {
-            $id = $this->model->insertCampeon($campeonesbyid-> id_campeon, $campeonesbyid->id_faccion_fk, $campeonesbyid->campeon, $campeonesbyid->rareza, $campeonesbyid->afinidad);
+            $id = $this->model->insertCampeon($campeonesbyid->id_faccion_fk, $campeonesbyid->campeon, $campeonesbyid->rareza, $campeonesbyid->afinidad);
             $campeonesbyid = $this->model->getCampeonbyid($id);
             $this->view->response($campeonesbyid, 201);
         }
@@ -69,6 +70,18 @@ class ReviewApiController {
         $this->view->response($campeones);
       }
       else
-      $this->view->response("el auto con el id=$id no existe", 404);
+      $this->view->response("el campeon con el id=$id no existe", 404);
         }
+
+        public function updateProduct($params = null){
+          $id = $params[':ID'];
+          $campeon = $this->model->getCampeonbyid($id);
+          if ($campeon){
+              $campeon = $this->getData();
+              $this->model->update($campeon->id_faccion_fk, $campeon->campeon, $campeon->rareza, $campeon->afinidad, $id);
+              $this->view->response("el campeon con el id=$id se actualizo correctamente",200);
+              }else {
+              $this->view->response("El producto no existe",404);
+          }
+      }
 }
