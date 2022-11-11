@@ -36,9 +36,9 @@ class reviewModel {
     /**
      * Inserta una tarea en la base de datos.
      */
-    public function insertCampeon($id, $campeon, $rareza, $afinidad) {
-        $query = $this->db->prepare("INSERT INTO campeones (id, campeon, rareza, afinidad) VALUES (?, ?, ?, ?)");
-        $query->execute([$id, $campeon, $rareza, $afinidad]);
+    public function insertCampeon($id_faccion_fk, $campeon, $rareza, $afinidad) {
+        $query = $this->db->prepare("INSERT INTO campeones (id_faccion_fk, campeon, rareza, afinidad) VALUES (?, ?, ?, ?)");
+        $query->execute([$id_faccion_fk , $campeon, $rareza, $afinidad]);
 
         return $this->db->lastInsertId();
     }
@@ -53,36 +53,28 @@ class reviewModel {
     }
 
     function orderASC () {
-        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY id_campeones asc");
+        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY afinidad asc");
         $query->execute();
-        $reviews = $query->fetchAll(PDO::FETCH_OBJ);
-        return $reviews;
+        $campeones = $query->fetchAll(PDO::FETCH_OBJ);
+        return $campeones;
     }
 
     function orderDESC () {
-        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY id_campeones desc");
+        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY afinidad desc");
         $query->execute();
-        $reviews = $query->fetchAll(PDO::FETCH_OBJ);
-        return $reviews;
+        $campeones = $query->fetchAll(PDO::FETCH_OBJ);
+        return $campeones;
     }
 
     function sortbyorder ($sortby = null , $order = null ){
         $query = $this->db->prepare("SELECT * FROM campeones ORDER BY $sortby $order");
         $query->execute();
-        $reviews = $query->fetchAll(PDO::FETCH_OBJ);
-        return $reviews;
+        $campeones = $query->fetchAll(PDO::FETCH_OBJ);
+        return $campeones;
     }
 
-    function paginate ($page= null, $limit= null) {
-        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY id_campeon LIMIT $page, $limit");
-        $query->execute();
-        $reviews = $query->fetchAll(PDO::FETCH_OBJ);
-        return $reviews;
-    }
-    function filter ($filter = null) {
-        $query = $this->db->prepare("SELECT * FROM campeones WHERE campeon LIKE '$filter%' ");
-        $query->execute();
-        $reviews = $query->fetchAll(PDO::FETCH_OBJ);
-        return $reviews;
+    function update($id_faccion_fk, $campeon, $rareza, $afinidad, $id){
+        $query = $this->db->prepare('UPDATE campeones SET id_faccion_fk=?, campeon=?, rareza=?, afinidad=? WHERE id=?');
+        $query->execute([$id_faccion_fk, $campeon, $rareza, $afinidad, $id]);
     }
 }

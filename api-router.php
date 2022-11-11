@@ -9,7 +9,8 @@ $router = new Router();
 $router->addRoute('campeones', 'GET', 'ReviewApiController', 'showAll');
 $router->addRoute('campeones/:ID', 'GET', 'ReviewApiController', 'showCampeones');
 $router->addRoute('campeones/:ID', 'DELETE', 'ReviewApiController', 'delete');
-$router->addRoute('campeones', 'POST', 'ReviewApiController', 'addCampeones'); 
+$router->addRoute('campeones', 'POST', 'ReviewApiController', 'addCampeones');
+$router->addRoute('campeones/:ID', 'PUT', 'ReviewApiController', 'updateProduct'); 
 
 //$router->addRoute('reviews', 'PUT', 'Reviewcontroller', 'editreview');
 
