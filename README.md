@@ -16,3 +16,13 @@ Verbo DELETE: http://localhost/tpe-web2-2nd/api/campeones/id
 
 ## Endpoint POST
 Verbo POST: http://localhost/tpe-web2-2nd/api/campeones
+
+## Endpoint PUT
+
+Verbo PUT: http://localhost/tpe-web2-2nd/api/campeones
+
+## Obtener por ASC o DESC
+
+http://localhost/tpe-web2-2nd/api/campeones/?sortby=modelo&order=DESC
+
+http://localhost/tpe-web2-2nd/api/campeones/?sortby=modelo&order=ASC
