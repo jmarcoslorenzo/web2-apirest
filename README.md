@@ -15,6 +15,7 @@ El endpoint por ID es: http://localhost/tpe-web2-2nd/api/campeones/id
 Verbo DELETE: http://localhost/tpe-web2-2nd/api/campeones/id
 
 ## Endpoint POST
+<<<<<<< HEAD
 Verbo POST: http://localhost/tpe-web2-2nd/api/campeones
 
 ## Endpoint PUT
@@ -26,3 +27,6 @@ Verbo PUT: http://localhost/tpe-web2-2nd/api/campeones
 http://localhost/tpe-web2-2nd/api/campeones/?sortby=modelo&order=DESC
 
 http://localhost/tpe-web2-2nd/api/campeones/?sortby=modelo&order=ASC
+=======
+Verbo POST: http://localhost/tpe-web2-2nd/api/campeones
+>>>>>>> da895c71f18b1a51705cae4b52cf23c208da8cbb
