@@ -24,9 +24,9 @@ Verbo PUT: http://localhost/tpe-web2-2nd/api/campeones
 
 ## Obtener por ASC o DESC
 
-http://localhost/tpe-web2-2nd/api/campeones/?sortby=modelo&order=DESC
+http://localhost/tpe-web2-2nd/api/campeones/?sortby=id&order=DESC
 
-http://localhost/tpe-web2-2nd/api/campeones/?sortby=modelo&order=ASC
+http://localhost/tpe-web2-2nd/api/campeones/?sortby=id&order=ASC
 =======
 Verbo POST: http://localhost/tpe-web2-2nd/api/campeones
 >>>>>>> da895c71f18b1a51705cae4b52cf23c208da8cbb

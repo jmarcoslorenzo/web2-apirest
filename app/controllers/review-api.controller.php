@@ -23,12 +23,12 @@ class ReviewApiController {
       $campeones=$this->model->getAll();
         if (isset($_GET['sortby']) && isset($_GET['order'])){
             if($_GET['order'] == 'ASC'){
-                if($_GET['sortby'] == 'afinidad')
-                $campeones = $this->model->orderASC();//?sortby=afinidad&order=ASC
+                if($_GET['sortby'] == 'id')
+                $campeones = $this->model->orderASC();//?sortby=id&order=ASC
                 }
             elseif ($_GET['order'] == 'DESC'){
-                if($_GET['sortby'] == 'afinidad')
-                $campeones = $this->model->orderDESC();//?sortby=afinidad&order=DESC
+                if($_GET['sortby'] == 'id')
+                $campeones = $this->model->orderDESC();//?sortby=id&order=DESC
             }
         }
         else{
@@ -70,7 +70,7 @@ class ReviewApiController {
         $this->view->response($campeones);
       }
       else
-      $this->view->response("el campeon con el id=$id no existe", 404);
+      $this->view->response("el campeón con el id=$id no existe", 404);
         }
 
         public function updateProduct($params = null){
@@ -79,9 +79,9 @@ class ReviewApiController {
           if ($campeon){
               $campeon = $this->getData();
               $this->model->update($campeon->id_faccion_fk, $campeon->campeon, $campeon->rareza, $campeon->afinidad, $id);
-              $this->view->response("el campeon con el id=$id se actualizo correctamente",200);
+              $this->view->response("el campeón con el id=$id se actualizo correctamente",200);
               }else {
-              $this->view->response("El producto no existe",404);
+              $this->view->response("El campeón no existe",404);
           }
       }
 }

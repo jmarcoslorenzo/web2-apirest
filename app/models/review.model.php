@@ -53,14 +53,14 @@ class reviewModel {
     }
 
     function orderASC () {
-        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY afinidad asc");
+        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY id ASC");
         $query->execute();
         $campeones = $query->fetchAll(PDO::FETCH_OBJ);
         return $campeones;
     }
 
     function orderDESC () {
-        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY afinidad desc");
+        $query = $this->db->prepare("SELECT * FROM campeones ORDER BY id DESC");
         $query->execute();
         $campeones = $query->fetchAll(PDO::FETCH_OBJ);
         return $campeones;
